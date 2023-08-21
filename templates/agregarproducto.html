@@ -1,0 +1,48 @@
+{% extends "layouts/main.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1 class="text-center mb-4">Nuevo Producto</h1>
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% if post is not None %}
+                    <input type="hidden" value="{{post.id}}" name="id">
+                {% endif %}
+                <div class="form-group">
+                    <label for="id_title">Nombre</label>
+                    <input type="text" class="form-control" name="title" id="id_title" required placeholder="Nombre del producto"
+                        {% if post is not None %} value="{{post.title}}" {% endif %}>
+                </div>
+                <div class="form-group">
+                    <label for="id_content">Descripcion</label>
+                    <textarea class="form-control" name="content" id="id_content" rows="10" required>{% if post is not None %}{{post.content}}{% endif %}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="id_content">Precio</label>
+                    <input type="text" class="form-control" name="precio" id="id_precio" required placeholder="Precio del producto"
+                        {% if post is not None %} value="{{post.precio}}" {% endif %}>
+                </div>
+                <div class="form-group my-2">
+                    <label for="id_imagen">Imagen</label>
+                    <input type="file" class="form-control-file" name="imagen" id="id_imagen" accept="image/*"
+                        {% if post is not None %} value="{{post.imagen}}" {% endif %}>
+                </div>
+                <button type="submit" class="btn btn-primary my-3">Enviar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Agregar los archivos JavaScript de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+{% endblock %}

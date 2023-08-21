@@ -1,0 +1,65 @@
+{% extends "layouts/main.html" %}
+{% block content %}
+
+<div class="row">
+    
+    <div class="col-lg-8 d-none d-lg-block">
+        
+        <h1 class="text-dark text-center"><strong> Bienvenido</strong></h1>
+        <p class="text-center"><strong><span class="text-success">AgroConecta</span></strong> es el sitio web que te acerca a los mejores <strong><span class="text-success">productos orgánicos</span></strong> directamente desde el campo. ¿Te gustaría disfrutar de frutas y verduras frescas, sanas y deliciosas en tu mesa? ¿Quieres apoyar a los <strong><span class="text-success">productores agrícolas</span></strong> que cuidan el medio ambiente y ofrecen alimentos de calidad? Entonces estás en el lugar correcto.</p>
+        <p class="text-center"><strong><span class="text-success">AgroConecta</span></strong> es una <strong><span class="text-success">plataforma</span></strong> que conecta a los <strong><span class="text-success">productores orgánicos</span></strong> con los <strong><span class="text-success">consumidores finales</span></strong>, sin intermediarios ni costos adicionales. Aquí podrás encontrar una gran variedad de <strong><span class="text-success">productos ecológicos</span></strong>, seleccionar los que más te gusten y recibirlos en tu <strong><span class="text-success">domicilio</span></strong> con la mayor rapidez y seguridad. Además, podrás conocer a los <strong><span class="text-success">productores</span></strong>, sus métodos de cultivo y sus historias, y valorar su trabajo con tus comentarios y calificaciones.</p>
+        <p class="text-center">Si eres un <strong><span class="text-success">productor orgánico</span></strong>, <strong><span class="text-success">AgroConecta</span></strong> te ofrece la oportunidad de acceder a un mercado más amplio y justo, donde podrás vender tus productos directamente a los <strong><span class="text-success">consumidores</span></strong>, sin depender de intermediarios ni perder margen de ganancia. También podrás recibir <strong><span class="text-success">feedback</span></strong> de tus clientes, mejorar tu visibilidad y reputación, y formar parte de una <strong><span class="text-success">comunidad</span></strong> comprometida con la <strong><span class="text-success">agricultura sostenible</span></strong>.</p>
+        <p class="text-center"><strong><span class="text-success">AgroConecta</span></strong> es más que un sitio web, es una forma de vivir más saludable, solidaria y ecológica. Únete a nosotros y descubre los beneficios de consumir <strong><span class="text-success">productos orgánicos</span></strong> directamente desde el campo.</p>
+    </div>
+    <div class="col-12 col-lg-4">
+        <div class="card" style="height: 100vh; overflow: auto; margin: 10px;">
+            <div class="card-body">
+                <h3 class="text-center mb-3 text-success" >Productos orgánicos!</h3>
+                {% for p in productos %}
+                    <div class="row mb-3">
+                    <div class="col-4">
+                        {% if request.user.is_authenticated %}
+                        <a >
+                        {% if p.imagen %}
+                        
+                            <img src="{{p.imagen.url}}" alt="{{p.nombre}}" class="img-fluid">
+                        
+                        {% endif %}
+                        </a>
+                        {% else %}
+                            <a "/login">
+                                {% if p.imagen %}
+                                
+                                    <img src="{{p.imagen.url}}" alt="{{p.nombre}}" class="img-fluid">
+                                
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                        
+                    </div>
+                    <div class="col-8">
+                        {% if request.user.is_authenticated %}
+                        <h5 class="card-title">
+                        <a href="{% url 'Add' p.id %}" style="text-decoration: none;" class="text-dark">{{p.title}}</a>
+                        </h5>
+                        <p class="card-text">
+                        <a href="{% url 'Add' p.id %}" style="text-decoration: none;" class="text-dark">{{p.content}}</a>
+                        </p>
+                        {% else %}
+                        <h5 class="card-title">
+                            <a href="/login" style="text-decoration: none;" class="text-dark">{{p.title}}</a>
+                            </h5>
+                            <p class="card-text">
+                            <a href="/login" style="text-decoration: none;" class="text-dark">{{p.content}}</a>
+                            </p>
+                        {% endif %}
+
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
